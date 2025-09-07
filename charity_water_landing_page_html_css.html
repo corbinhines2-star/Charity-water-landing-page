@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>See where Every. Drop. Goes. — charity: water (student project)</title>
+  <meta name="description" content="From photos to stories, see exactly how your impact is being felt. Join a community that makes clean water possible." />
+  <!--
+    HOW TO USE THIS FILE (beginner friendly)
+    1) Replace placeholders marked with ✏️ (logo, copy, images, email/phone).
+    2) Adjust the color variables in :root to match your brand palette.
+    3) Save this as index.html in a GitHub repo → Settings → Pages → Deploy from main.
+    4) Swap Unsplash placeholder images with your Canva/brand assets.
+  -->
+  <style>
+    :root {
+      /* ✏️ Brand colors */
+      --brand-primary: #FFD200; /* charity: water yellow (adjust if needed) */
+      --brand-black: #0f0f0f;
+      --brand-white: #ffffff;
+      --brand-muted: #f7f7f7;
+      --brand-accent: #111827; /* deep gray for contrast */
+
+      /* ✏️ Typography */
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Arial, "Noto Sans", sans-serif; /* Proxima Nova alt */
+      --radius: 14px;
+      --shadow: 0 10px 20px rgba(0,0,0,.08);
+      --max-w: 1200px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: var(--font-sans); color: var(--brand-accent); line-height: 1.6; background: var(--brand-white); }
+
+    /* Layout helpers */
+    .container { width: 100%; max-width: var(--max-w); margin: 0 auto; padding: 0 20px; }
+    .grid { display: grid; gap: 20px; }
+    .btn { display: inline-block; background: var(--brand-primary); color: var(--brand-black); padding: 12px 18px; border-radius: 999px; text-decoration: none; font-weight: 800; box-shadow: var(--shadow); transition: transform .08s ease; }
+    .btn:hover { transform: translateY(-1px); }
+    .btn.secondary { background: var(--brand-black); color: var(--brand-white); }
+    .badge { display: inline-block; padding: 6px 10px; font-size: 12px; font-weight: 800; letter-spacing: .5px; color: var(--brand-black); background: #fff1a6; border-radius: 999px; }
+    .card { background: var(--brand-white); border: 1px solid #eaeaea; border-radius: var(--radius); box-shadow: var(--shadow); padding: 22px; }
+
+    /* Nav */
+    header { position: sticky; top: 0; z-index: 40; backdrop-filter: saturate(1.2) blur(6px); background: rgba(255,255,255,.86); border-bottom: 1px solid #eee; }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .nav a { color: var(--brand-accent); text-decoration: none; font-weight: 700; margin-left: 18px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 900; letter-spacing: .3px; }
+    .brand img { width: 36px; height: 36px; object-fit: contain; }
+
+    /* Hero */
+    .hero { position: relative; background: linear-gradient(135deg, rgba(0,0,0,.55), rgba(0,0,0,.35)), url('https://images.unsplash.com/photo-1455732063391-5f50f3c405b9?q=80&w=1920&auto=format&fit=crop'); background-size: cover; background-position: center; color: var(--brand-white); }
+    .hero .inner { padding: 96px 0 72px; }
+    .hero h1 { font-size: clamp(32px, 6vw, 56px); line-height: 1.05; margin: 10px 0 16px; }
+    .hero p { font-size: clamp(16px, 2.3vw, 20px); max-width: 720px; opacity: .98; }
+    .hero .cta { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 20px; }
+
+    /* Social proof */
+    .logos { background: var(--brand-muted); padding: 20px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; }
+    .logo-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; align-items: center; filter: grayscale(1); opacity: .75; }
+    .logo-row img { width: 100%; height: 44px; object-fit: contain; }
+
+    /* Sections */
+    section { padding: 64px 0; }
+    h2 { font-size: clamp(24px, 4vw, 36px); margin: 0 0 14px; }
+    .subtitle { color: #6b7280; margin-top: -4px; }
+    .features { grid-template-columns: repeat(3, 1fr); }
+    .feature h3 { margin: 0 0 6px; font-size: 18px; }
+
+    /* Impact / Highlight band */
+    .band { background: linear-gradient(90deg, var(--brand-primary), #ffe580); color: var(--brand-black); border-radius: var(--radius); padding: 28px; display: grid; grid-template-columns: 1.2fr 1fr; align-items: center; gap: 20px; }
+    .band * { color: var(--brand-black); }
+    .band .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .stat { background: rgba(255,255,255,.9); border-radius: 10px; padding: 16px; text-align: center; font-weight: 900; }
+    .stat small { display: block; font-weight: 700; opacity: .7; }
+
+    /* About */
+    .about { grid-template-columns: 1.1fr 1fr; align-items: center; }
+    .about img { width: 100%; border-radius: var(--radius); box-shadow: var(--shadow); }
+
+    /* Gallery */
+    .gallery { grid-template-columns: repeat(3, 1fr); }
+    .gallery img { width: 100%; height: 220px; object-fit: cover; border-radius: 12px; }
+
+    /* Contact */
+    form { display: grid; gap: 12px; }
+    input, textarea, select { width: 100%; padding: 12px 14px; border: 1px solid #e5e7eb; border-radius: 10px; font: inherit; }
+    label { font-weight: 800; font-size: 14px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    /* Footer */
+    footer { background: var(--brand-black); color: var(--brand-white); padding: 32px 0; }
+    footer a { color: var(--brand-white); text-decoration: none; opacity: .9; }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .features { grid-template-columns: 1fr 1fr; }
+      .about, .band { grid-template-columns: 1fr; }
+      .band .stats { grid-template-columns: 1fr 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .logo-row { grid-template-columns: 1fr 1fr 1fr; }
+      .features { grid-template-columns: 1fr; }
+      .gallery { grid-template-columns: 1fr 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <img src="logo.png" alt="charity: water drop logo (placeholder)" />
+        <span>charity: water</span>
+      </div>
+      <nav>
+        <a href="#features">How it works</a>
+        <a href="#about">Why this</a>
+        <a href="#gallery">Moments</a>
+        <a href="#contact" class="btn" style="margin-left:16px;">Join</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="container inner">
+      <span class="badge">Transparency • Impact • Community</span>
+      <h1>See where Every. Drop. Goes.</h1>
+      <p>From photos to stories, see exactly how your impact is being felt. Follow projects in the field and meet the people whose lives are changed by clean water.</p>
+      <div class="cta">
+        <a href="#contact" class="btn">Join the community</a>
+        <a href="#features" class="btn secondary">How it works</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF / LOGOS (optional) -->
+  <div class="logos">
+    <div class="container logo-row">
+      <img src="https://dummyimage.com/300x80/cccccc/000000.png&text=Logo+1" alt="Partner logo 1" />
+      <img src="https://dummyimage.com/300x80/cccccc/000000.png&text=Logo+2" alt="Partner logo 2" />
+      <img src="https://dummyimage.com/300x80/cccccc/000000.png&text=Logo+3" alt="Partner logo 3" />
+      <img src="https://dummyimage.com/300x80/cccccc/000000.png&text=Logo+4" alt="Partner logo 4" />
+      <img src="https://dummyimage.com/300x80/cccccc/000000.png&text=Logo+5" alt="Partner logo 5" />
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="container">
+      <h2>Track your impact</h2>
+      <p class="subtitle">Resources, stories, and a community to build on your passion for giving.</p>
+      <div class="grid features">
+        <article class="card feature">
+          <h3>Every project, mapped</h3>
+          <p>Follow where donations go with location details and project milestones you can share.</p>
+        </article>
+        <article class="card feature">
+          <h3>Stories from the field</h3>
+          <p>Receive photo updates and first‑person narratives from communities getting clean water.</p>
+        </article>
+        <article class="card feature">
+          <h3>Give with confidence</h3>
+          <p>Know how funds are allocated and what outcomes they create—no guesswork.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACT BAND / METRICS -->
+  <section>
+    <div class="container">
+      <div class="band">
+        <div>
+          <h3 style="margin:0 0 6px;">Impact you can see</h3>
+          <p style="margin:0;">Celebrate progress with real numbers and real people behind them.</p>
+        </div>
+        <div class="stats">
+          <div class="stat"><span style="font-size:28px;">1,200+</span><small>Projects tracked</small></div>
+          <div class="stat"><span style="font-size:28px;">98%</span><small>Donor satisfaction</small></div>
+          <div class="stat"><span style="font-size:28px;">24 hr</span><small>Avg. update time</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container grid about">
+      <div>
+        <h2>Why this exists</h2>
+        <p class="subtitle">Frequent donors deserve clarity, connection, and community.</p>
+        <p>We designed this page around the idea that transparency inspires action. By pairing bright, optimistic color with joyful photography, donors can immediately see where their support is going and who it’s helping.</p>
+        <p>It’s simple: make impact visible, honor the story, and make it easy to take the next step.</p>
+        <a href="#contact" class="btn" style="margin-top:6px;">Get updates</a>
+      </div>
+      <img src="https://images.unsplash.com/photo-1543363136-37f4b6a4f3d8?q=80&w=1200&auto=format&fit=crop" alt="Smiling child with clean water (placeholder)" />
+    </div>
+  </section>
+
+  <!-- GALLERY / SHOWCASE -->
+  <section id="gallery">
+    <div class="container">
+      <h2>Recent project moments</h2>
+      <p class="subtitle">Swap these with images from your Canva design or field updates.</p>
+      <div class="grid gallery">
+        <img src="https://images.unsplash.com/photo-1565031283073-8939f1a18111?q=80&w=1200&auto=format&fit=crop" alt="Community gathering at a well (placeholder)" />
+        <img src="https://images.unsplash.com/photo-1508182311256-e3f6b4865b6d?q=80&w=1200&auto=format&fit=crop" alt="Clean water being collected (placeholder)" />
+        <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=1200&auto=format&fit=crop" alt="Smiles and celebration (placeholder)" />
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / LEAD FORM -->
+  <section id="contact" style="background: var(--brand-muted);">
+    <div class="container">
+      <h2>Ready to make your impact visible?</h2>
+      <p class="subtitle">Join the list for project updates and stories from the field.</p>
+      <div class="grid" style="grid-template-columns: 1.1fr 1fr; gap: 24px;">
+        <form action="mailto:hello@example.com" method="post" enctype="text/plain" class="card">
+          <div class="form-grid">
+            <div>
+              <label for="name">Name</label>
+              <input id="name" name="name" placeholder="Your name" required />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" required />
+            </div>
+          </div>
+          <label for="topic">I’m most interested in</label>
+          <select id="topic" name="topic">
+            <option>Tracking a specific project</option>
+            <option>Stories & field updates</option>
+            <option>Monthly giving community</option>
+          </select>
+          <label for="message">Message (optional)</label>
+          <textarea id="message" name="message" rows="5" placeholder="Tell us what you’d like to follow…"></textarea>
+          <button class="btn" type="submit">Subscribe</button>
+        </form>
+
+        <aside class="card">
+          <h3 style="margin-top:0;">Prefer email or phone?</h3>
+          <p><strong>Email:</strong> <a href="mailto:hello@example.com">hello@example.com</a><br/>
+             <strong>Phone:</strong> <a href="tel:+15555550123">(555) 555‑0123</a></p>
+          <p><strong>Office:</strong> 123 Example Ave, City, ST</p>
+          <p style="font-size:14px; opacity:.8;">By submitting, you agree to our <a href="#">Privacy Policy</a>.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container" style="display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <img src="logo.png" alt="logo" style="width:28px; height:28px; object-fit:contain;" />
+        <strong>charity: water</strong>
+      </div>
+      <small style="opacity:.8;">Unofficial student project for learning purposes. Replace placeholder imagery and text with your own assets.</small>
+    </div>
+  </footer>
+</body>
+</html>
